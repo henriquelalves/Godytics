@@ -22,8 +22,8 @@ def configure(env):
 			'-l','z'
     	])
 	if env["platform"] == "android":
-		env.android_add_dependency("compile 'com.android.support:appcompat-v7:23.0.0'")
-        env.android_add_dependency("compile 'com.google.android.gms:play-services-analytics:9.2.0'")
+		env.android_add_dependency("compile 'com.android.support:appcompat-v7:27.+'")
+        env.android_add_dependency("compile 'com.google.android.gms:play-services-analytics:+'")
         env.android_add_java_dir("android")
         env.android_add_to_manifest("android/AndroidManifestChunk.xml")
         env.disable_module()

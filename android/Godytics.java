@@ -82,7 +82,7 @@ public class Godytics extends Godot.SingletonBase {
           });
      }
 
-     public void event(final String category, final String action, final String label) {
+     public void event(final String category, final String action, final String label, final int value) {
          activity.runOnUiThread(new Runnable(){
            @Override
            public void run() {
@@ -92,6 +92,7 @@ public class Godytics extends Godot.SingletonBase {
                 .setCategory(category)
                 .setAction(action)
                 .setLabel(label)
+		.setValue(value)
                 .build());
                 Log.i("godot", "GoogleAnalytics: sending event: c:" + category + ", a:" +action + ", l:" + label);
               }
