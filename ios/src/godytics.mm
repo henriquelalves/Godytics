@@ -41,13 +41,14 @@ void Godytics::screen(const String &name) {
   }
 }
 
-void Godytics::event(const String &cat, const String &act, const String &lab) {
-  if(initialized) {
-    NSString * category = [NSString stringWithCString:cat.utf8().get_data() encoding:NSUTF8StringEncoding];
-    NSString * action = [NSString stringWithCString:act.utf8().get_data() encoding:NSUTF8StringEncoding];
-    NSString * label = [NSString stringWithCString:lab.utf8().get_data() encoding:NSUTF8StringEncoding];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:nil] build]];
-  }
+void Godytics::event(const String &cat, const String &act, const String &lab, int val) {
+    if(initialized) {
+        NSString * category = [NSString stringWithCString:cat.utf8().get_data() encoding:NSUTF8StringEncoding];
+        NSString * action = [NSString stringWithCString:act.utf8().get_data() encoding:NSUTF8StringEncoding];
+        NSString * label = [NSString stringWithCString:lab.utf8().get_data() encoding:NSUTF8StringEncoding];
+        NSNumber * value = [NSNumber numberWithInt:val];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build]];
+    }
 }
 
 void Godytics::_bind_methods() {

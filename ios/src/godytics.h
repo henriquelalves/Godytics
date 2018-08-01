@@ -31,7 +31,7 @@ public:
 
     void init(const String &tId);
     void screen(const String &name);
-    void event(const String &cat, const String &act, const String &lab);
+    void event(const String &cat, const String &act, const String &lab, int val);
 
     Godytics();
     ~Godytics();
