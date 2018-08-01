@@ -1,10 +1,16 @@
 #include "godytics.h"
-#include "core/globals.h"
 #include "core/variant.h"
 #include "core/message_queue.h"
 
 #import <UIKit/UIKit.h>
 
+#if VERSION_MAJOR == 3
+#define CLASS_DB ClassDB
+#include <core/engine.h>
+#else
+#define CLASS_DB ObjectTypeDB
+#include "core/globals.h"
+#endif
 
 Godytics* GODYTICS_INSTANCE = NULL;
 
@@ -45,7 +51,7 @@ void Godytics::event(const String &cat, const String &act, const String &lab) {
 }
 
 void Godytics::_bind_methods() {
-    ObjectTypeDB::bind_method("init",&Godytics::init);
-    ObjectTypeDB::bind_method("screen",&Godytics::screen);
-    ObjectTypeDB::bind_method("event",&Godytics::event);
+    CLASS_DB::bind_method("init",&Godytics::init);
+    CLASS_DB::bind_method("screen",&Godytics::screen);
+    CLASS_DB::bind_method("event",&Godytics::event);
 }

@@ -1,6 +1,8 @@
 #ifndef GODYTICS_H
 #define GODYTICS_H
 
+#include <version_generated.gen.h>
+
 #include "reference.h"
 
 #ifdef __OBJC__
@@ -10,7 +12,11 @@
 #endif
 
 class Godytics : public Reference {
-    OBJ_TYPE(Godytics,Reference);
+#if VERSION_MAJOR == 3
+    GDCLASS(Godytics, Reference);
+#else
+    OBJ_TYPE(Godytics, Reference);
+#endif
 
     bool initialized;
 
