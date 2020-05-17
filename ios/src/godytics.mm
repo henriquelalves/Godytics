@@ -1,10 +1,16 @@
 #include "godytics.h"
-#include "core/globals.h"
 #include "core/variant.h"
 #include "core/message_queue.h"
 
 #import <UIKit/UIKit.h>
 
+#if VERSION_MAJOR == 3
+#define CLASS_DB ClassDB
+#include <core/engine.h>
+#else
+#define CLASS_DB ObjectTypeDB
+#include "core/globals.h"
+#endif
 
 Godytics* GODYTICS_INSTANCE = NULL;
 
@@ -35,17 +41,18 @@ void Godytics::screen(const String &name) {
   }
 }
 
-void Godytics::event(const String &cat, const String &act, const String &lab) {
-  if(initialized) {
-    NSString * category = [NSString stringWithCString:cat.utf8().get_data() encoding:NSUTF8StringEncoding];
-    NSString * action = [NSString stringWithCString:act.utf8().get_data() encoding:NSUTF8StringEncoding];
-    NSString * label = [NSString stringWithCString:lab.utf8().get_data() encoding:NSUTF8StringEncoding];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:nil] build]];
-  }
+void Godytics::event(const String &cat, const String &act, const String &lab, int val) {
+    if(initialized) {
+        NSString * category = [NSString stringWithCString:cat.utf8().get_data() encoding:NSUTF8StringEncoding];
+        NSString * action = [NSString stringWithCString:act.utf8().get_data() encoding:NSUTF8StringEncoding];
+        NSString * label = [NSString stringWithCString:lab.utf8().get_data() encoding:NSUTF8StringEncoding];
+        NSNumber * value = [NSNumber numberWithInt:val];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build]];
+    }
 }
 
 void Godytics::_bind_methods() {
-    ObjectTypeDB::bind_method("init",&Godytics::init);
-    ObjectTypeDB::bind_method("screen",&Godytics::screen);
-    ObjectTypeDB::bind_method("event",&Godytics::event);
+    CLASS_DB::bind_method("init",&Godytics::init);
+    CLASS_DB::bind_method("screen",&Godytics::screen);
+    CLASS_DB::bind_method("event",&Godytics::event);
 }

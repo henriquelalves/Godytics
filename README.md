@@ -1,6 +1,6 @@
 
 # Godytics
-Google Analytics for Godot Engine v2.1 stable 
+Google Analytics for Godot Engine v2.1 stable and v3.0
 
 Supported platforms;
 - IOS
@@ -12,6 +12,11 @@ Supported platforms;
 [android]
 modules="org/godotengine/godot/Godytics"
 ```
+
+### iOS: Add the following libraries and frameworks to the xcode project
+![](http://i.imgur.com/hwpu7F2.png)
+
+The last two are in this repository, under ios/lib.
 
 ### Add Analytics.gd GDScript (Singleton / Autoload Script) and define module initialization code in _ready() func
 

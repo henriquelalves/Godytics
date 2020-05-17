@@ -1,6 +1,8 @@
 #ifndef GODYTICS_H
 #define GODYTICS_H
 
+#include <version_generated.gen.h>
+
 #include "reference.h"
 
 #ifdef __OBJC__
@@ -10,7 +12,11 @@
 #endif
 
 class Godytics : public Reference {
-    OBJ_TYPE(Godytics,Reference);
+#if VERSION_MAJOR == 3
+    GDCLASS(Godytics, Reference);
+#else
+    OBJ_TYPE(Godytics, Reference);
+#endif
 
     bool initialized;
 
@@ -25,7 +31,7 @@ public:
 
     void init(const String &tId);
     void screen(const String &name);
-    void event(const String &cat, const String &act, const String &lab);
+    void event(const String &cat, const String &act, const String &lab, int val);
 
     Godytics();
     ~Godytics();
